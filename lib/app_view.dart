@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:instax/screens/authentication/welcome_screen.dart';
 
 import 'blocs/authentication_bloc/authentication_bloc.dart';
@@ -29,7 +30,12 @@ class MyAppView extends StatelessWidget {
 			home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
 				builder: (context, state) {
 					if(state.status == AuthenticationStatus.authenticated) {
-						return const HomeScreen();
+						return BlocProvider(
+							create: (context) => SignInBloc(
+								userRepository: context.read<AuthenticationBloc>().userRepository
+							),
+							child: const HomeScreen(),
+						);
 					} else {
 						return const WelcomeScreen();
 					}
