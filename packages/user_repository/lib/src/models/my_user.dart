@@ -6,9 +6,9 @@ class MyUser extends Equatable {
 	final String id;
 	final String email;
 	final String name;
-	final String? picture;
+	String? picture;
 
-	const MyUser({
+	MyUser({
 		required this.id,
 		required this.email,
 		required this.name,
@@ -16,7 +16,7 @@ class MyUser extends Equatable {
 	});
 
 	/// Empty user which represents an unauthenticated user.
-  static const empty = MyUser(
+  static final empty = MyUser(
 		id: '', 
 		email: '',
 		name: '', 
