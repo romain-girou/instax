@@ -114,7 +114,9 @@ class FirebaseUserRepository implements UserRepository {
         imageFile,
       );
 			String url = await firebaseStoreRef.getDownloadURL();
-			await usersCollection.doc(userId).update({'picture': url});
+			await usersCollection
+				.doc(userId)
+				.update({'picture': url});
 			return url;
 		} catch (e) {
 		  log(e.toString());
