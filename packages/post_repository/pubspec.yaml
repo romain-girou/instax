@@ -11,6 +11,10 @@ dependencies:
     sdk: flutter
 
   # Firebase
+
+  # Custom Repository
+  user_repository:
+    path: ../user_repository
   
 
 dev_dependencies:

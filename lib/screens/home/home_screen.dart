@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:image_cropper/image_cropper.dart';
-// import 'package:image_picker/image_picker.dart';
 import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
-
+import 'package:instax/screens/home/post_screen.dart';
 import '../../blocs/my_user_bloc/my_user_bloc.dart';
 import '../../blocs/update_user_info_bloc/update_user_info_bloc.dart';
 
@@ -30,11 +28,33 @@ class _HomeScreenState extends State<HomeScreen> {
 			},
 			child: Scaffold(
 					backgroundColor: Theme.of(context).colorScheme.background,
-					floatingActionButton: FloatingActionButton(
-						onPressed: () {},
-						child: const Icon(
-							CupertinoIcons.add
-						),
+					floatingActionButton: BlocBuilder<MyUserBloc, MyUserState>(
+						builder: (context, state) {
+							if(state.status == MyUserStatus.success) {
+								return FloatingActionButton(
+									onPressed: () {
+										Navigator.push(
+											context, 
+											MaterialPageRoute<void>(
+												builder: (BuildContext context) => PostScreen(
+													state.user!
+												),
+											),
+										);
+									},
+									child: const Icon(
+										CupertinoIcons.add
+									),
+								);
+							} else {
+								return const FloatingActionButton(
+									onPressed: null,
+									child: Icon(
+										CupertinoIcons.clear
+									),
+								); 
+							}
+						},
 					),
 					appBar: AppBar(
 						centerTitle: false,
