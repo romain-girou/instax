@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  uuid: ^4.0.0
 
   # Firebase
+  cloud_firestore: ^4.9.0
 
   # Custom Repository
   user_repository:

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:user_repository/user_repository.dart';
 
 class PostEntity {
@@ -26,7 +27,7 @@ class PostEntity {
     return PostEntity(
       postId: doc['postId'] as String,
 			post: doc['post'] as String,
-      createAt: DateTime.parse(doc['createAt']),
+      createAt: (doc['createAt'] as Timestamp).toDate(),
       myUser: MyUser.fromEntity(MyUserEntity.fromDocument(doc['myUser']))
     );
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instax/blocs/get_post_bloc/get_post_bloc.dart';
 import 'package:instax/blocs/my_user_bloc/my_user_bloc.dart';
 import 'package:instax/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:instax/blocs/update_user_info_bloc/update_user_info_bloc.dart';
 import 'package:instax/screens/authentication/welcome_screen.dart';
+import 'package:post_repository/post_repository.dart';
 
 import 'blocs/authentication_bloc/authentication_bloc.dart';
 import 'screens/home/home_screen.dart';
@@ -51,6 +53,11 @@ class MyAppView extends StatelessWidget {
 											myUserId: context.read<AuthenticationBloc>().state.user!.uid
 										)),
 									),
+									BlocProvider(
+										create: (context) => GetPostBloc(
+											postRepository: FirebasePostRepository()
+										)..add(GetPosts())
+									)
 								],
 							child: const HomeScreen(),
 						);
